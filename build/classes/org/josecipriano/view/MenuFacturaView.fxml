@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="675.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.josecipriano.controller.MenuFacturaController">
+   <children>
+      <ImageView fitHeight="675.0" fitWidth="950.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/menuFacturas.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tblFacturas" layoutX="22.0" layoutY="128.0" prefHeight="401.0" prefWidth="657.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="FacturaID" />
+          <TableColumn prefWidth="110.0" text="Fecha" />
+            <TableColumn prefWidth="77.0" text="Hora" />
+            <TableColumn prefWidth="96.0" text="Total" />
+            <TableColumn prefWidth="128.0" text="ClienteId" />
+            <TableColumn prefWidth="170.0" text="EmpleadoId" />
+        </columns>
+      </TableView>
+      <TextField fx:id="tfBuscar" layoutX="79.0" layoutY="95.0" prefHeight="25.0" prefWidth="600.0" />
+      <Button layoutX="806.0" layoutY="316.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="105.0" text="Reportes" />
+      <Button fx:id="btnEditar" layoutX="690.0" layoutY="316.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="105.0" text="Editar" />
+      <Button fx:id="btnEliminar" layoutX="806.0" layoutY="241.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="105.0" text="Eliminar" />
+      <Button fx:id="btnAgregar" layoutX="690.0" layoutY="241.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="105.0" text="Agregar" />
+      <Button fx:id="btnBuscar" layoutX="26.0" layoutY="95.0" mnemonicParsing="false" text="Buscar" />
+      <Button fx:id="btnRegresar" layoutX="726.0" layoutY="599.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Regresar" />
+   </children>
+</AnchorPane>
