@@ -51,30 +51,34 @@ public class MenuCategoriaProductoController implements Initializable {
     @FXML
     TableColumn colCategoriaId , colNombreCategoria, colDescripcionCategoria;
     @FXML
-    Button btnAgregar, btnEliminar, btnEditar, btnRegresar, btnBuscar; 
+    Button btnAgregar, btnEliminar, btnEditar, btnRegresar, btnBuscar, btnVaciar; 
             
     @FXML
     public void handleButtonAction(ActionEvent event){
         if(event.getSource() == btnRegresar){
             stage.menuPrincipalView();
-        } if(event.getSource() == btnAgregar){
+        } else if(event.getSource() == btnAgregar){
             agregarCategoriaProductos();
             cargarDatos();
-        } if (event.getSource() == btnEliminar){
+        } else if (event.getSource() == btnEliminar){
             eliminarCategoriaProducto(((CategoriaProducto)tblCategoria.getSelectionModel().getSelectedItem()).getCategoriaProductoId());
             cargarDatos();
-        } if (event.getSource() == btnBuscar){
+        }else  if (event.getSource() == btnBuscar){
             tblCategoria.getItems().clear();
-            if(tfBuscar.getText().equals("")){
+            tfBuscar.getText().equals("");
+            tblCategoria.getItems().add(buscarCategoriaProducto());
+            
+            
+        
+        } else if (event.getSource() == btnEditar){
+            if(!tfNombreCategoria.getText().equals("") && !taDescripcion.getText().equals("")){
+                editarCategoriaProducto();
+                CategoriaProductoDTO.getCategoriaProductoDTO().setCategoriaProducto(null);
                 cargarDatos();
             }
         
-        } if (event.getSource() == btnEditar){
-            if(!tfNombreCategoria.getText().equals("") && !taDescripcion.getText().equals("")){
-                CategoriaProductoDTO.getCategoriaProductoDTO().setCategoriaProducto((CategoriaProducto)tblCategoria.getSelectionModel().getSelectedItem());
-                editarCategoriaProducto();
-            }
-        
+        }else if(event.getSource() == btnVaciar){
+            vaciarForm();
         }
     
     
@@ -89,6 +93,7 @@ public class MenuCategoriaProductoController implements Initializable {
     }    
 
    public void cargarDatos(){
+      
         tblCategoria.setItems(listarCategoriaProducto());
         colCategoriaId.setCellValueFactory(new PropertyValueFactory<CategoriaProducto, Integer> ("categoriaProductoId"));
         colNombreCategoria.setCellValueFactory(new PropertyValueFactory<CategoriaProducto, String> ("nombreCategoria"));
@@ -168,6 +173,20 @@ public class MenuCategoriaProductoController implements Initializable {
      }
    }
    
+   @FXML
+   public void cargarForm(){
+       CategoriaProducto cP =(CategoriaProducto)tblCategoria.getSelectionModel().getSelectedItem();
+       if(cP != null){
+           tfcategoriaId.setText(Integer.toString(cP.getCategoriaProductoId()));
+           tfNombreCategoria.setText(cP.getNombreCategoria());
+           taDescripcion.setText(cP.getDescripcionCategoria());
+       
+       }
+   
+   
+   
+   }
+   
    public void eliminarCategoriaProducto(int catPId){
     try{
        conexion = Conexion.getInstance().obtenerConexion();
@@ -194,13 +213,19 @@ public class MenuCategoriaProductoController implements Initializable {
     }
 }
    
+   public void vaciarForm(){
+        tfcategoriaId.clear();
+        tfNombreCategoria.clear();
+        taDescripcion.clear();
+   }
+   
    public CategoriaProducto buscarCategoriaProducto(){
        CategoriaProducto categoriaProducto = null;
         try{
           conexion = Conexion.getInstance().obtenerConexion();
           String sql = "call sp_BuscarCategoriaProductos(?)";
           statement = conexion.prepareStatement(sql);
-          statement.setInt(1, Integer.parseInt(tfcategoriaId.getText()));
+          statement.setInt(1, Integer.parseInt(tfBuscar.getText()));
           resultSet = statement.executeQuery();
           
           if(resultSet.next()){
@@ -242,7 +267,7 @@ public class MenuCategoriaProductoController implements Initializable {
    public void editarCategoriaProducto(){
     try{
            conexion = Conexion.getInstance().obtenerConexion();
-           String sql = "call sp_EditarClientes(?,?,?)";
+           String sql = "call sp_EditarCategoriaProductos(?,?,?)";
            statement = conexion.prepareStatement(sql);
            statement.setInt(1, Integer.parseInt(tfcategoriaId.getText()));
            statement.setString(2, tfNombreCategoria.getText());

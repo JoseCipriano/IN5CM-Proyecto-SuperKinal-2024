@@ -19,7 +19,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.josecipriano.controller.FormClienteController;
-import org.josecipriano.controller.FormEmpleadosController;
 import org.josecipriano.controller.MenuCargosController;
 import org.josecipriano.controller.MenuCategoriaProductoController;
 import org.josecipriano.controller.MenuClienteController;
@@ -160,16 +159,7 @@ public class Main extends Application {
    
    }
    
-    public void menuFormEmpleado(){
-   try{
-          FormEmpleadosController formEmpleadoController = (FormEmpleadosController) switchScene("FormEmpleadosView.fxml" ,500,750);
-          formEmpleadoController.setStage(this);
-         }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-   
-   
-   }
+    
     
     public void menuFacturas(){
      try{

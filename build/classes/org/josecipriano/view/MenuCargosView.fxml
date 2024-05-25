@@ -18,7 +18,7 @@
             <Image url="@../image/menuCargos.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tblCargos" layoutX="249.0" layoutY="352.0" prefHeight="301.0" prefWidth="679.0">
+      <TableView fx:id="tblCargos" layoutX="249.0" layoutY="352.0" onMouseClicked="#cargarForm" prefHeight="301.0" prefWidth="679.0">
         <columns>
           <TableColumn fx:id="colCargoId" prefWidth="75.0" text="Cargo ID" />
           <TableColumn fx:id="colNombre" prefWidth="263.0" text="Nombre Cargo" />
@@ -30,7 +30,7 @@
       <Button fx:id="btnEditar" layoutX="680.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="72.0" text="Editar" />
       <Button layoutX="847.0" layoutY="281.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Reportes" />
       <Button fx:id="btnBuscar" layoutX="249.0" layoutY="319.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Buscar" />
-      <TextField fx:id="tfbuscar" layoutX="309.0" layoutY="319.0" prefHeight="25.0" prefWidth="616.0" />
+      <TextField fx:id="tfbuscar" layoutX="309.0" layoutY="319.0" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="616.0" />
       <Button fx:id="btnRegresar" layoutX="26.0" layoutY="628.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Regresar" />
       <TextField fx:id="tfnombreCargo" layoutX="42.0" layoutY="260.0" prefHeight="33.0" prefWidth="242.0" />
       <TextField fx:id="tfcargoId" layoutX="42.0" layoutY="187.0" prefHeight="33.0" prefWidth="231.0" />

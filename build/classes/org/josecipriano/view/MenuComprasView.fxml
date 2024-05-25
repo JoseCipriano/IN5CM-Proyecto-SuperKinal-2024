@@ -7,6 +7,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="675.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.josecipriano.controller.MenuComprasController">
    <children>
@@ -17,18 +19,40 @@
       </ImageView>
       <TableView fx:id="tblCompras" layoutX="20.0" layoutY="184.0" prefHeight="479.0" prefWidth="503.0">
         <columns>
-          <TableColumn prefWidth="121.0" text="Detalle Compra ID" />
-          <TableColumn prefWidth="134.0" text="Cantidad Compra" />
-            <TableColumn prefWidth="156.0" text="ProductoId" />
-            <TableColumn prefWidth="91.0" text="CompraId" />
+          <TableColumn prefWidth="121.0" text="Compra ID" />
+          <TableColumn prefWidth="192.0" text="Fecha Compra" />
+            <TableColumn prefWidth="189.0" text="Total Compra" />
         </columns>
       </TableView>
       <Button fx:id="btnBuscar" layoutX="20.0" layoutY="153.0" mnemonicParsing="false" text="Buscar" />
-      <Button fx:id="btnEditar" layoutX="548.0" layoutY="293.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="142.0" text="Editar" />
-      <Button fx:id="btnAgreagar" layoutX="548.0" layoutY="198.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="142.0" text="Agregar" />
-      <Button fx:id="btnEliminar" layoutX="705.0" layoutY="198.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="142.0" text="Eliminar" />
-      <Button layoutX="705.0" layoutY="293.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="142.0" text="Reportes" />
+      <Button fx:id="btnEditar" layoutX="819.0" layoutY="296.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Editar" />
+      <Button fx:id="btnAgreagar" layoutX="819.0" layoutY="191.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Agregar" />
+      <Button fx:id="btnEliminar" layoutX="819.0" layoutY="242.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Eliminar" />
+      <Button layoutX="819.0" layoutY="345.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Reportes" />
       <TextField fx:id="tfBuscar" layoutX="79.0" layoutY="153.0" prefHeight="25.0" prefWidth="443.0" />
       <Button fx:id="btnRegresar" layoutX="866.0" layoutY="628.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Regresar" />
+      <TextField layoutX="544.0" layoutY="230.0" prefHeight="25.0" prefWidth="236.0" />
+      <TextField layoutX="544.0" layoutY="309.0" prefHeight="25.0" prefWidth="236.0" />
+      <TextField layoutX="544.0" layoutY="392.0" prefHeight="25.0" prefWidth="236.0" />
+      <Text fill="#262c29" fontSmoothingType="LCD" layoutX="544.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="221.99997848272324">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="26.0" />
+         </font>
+      </Text>
+      <Text fill="#262c29" fontSmoothingType="LCD" layoutX="551.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="221.99997848272324">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="26.0" />
+         </font>
+      </Text>
+      <Text fill="#262c29" fontSmoothingType="LCD" layoutX="544.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha Compra" wrappingWidth="221.99997848272324">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="26.0" />
+         </font>
+      </Text>
+      <Text fill="#262c29" fontSmoothingType="LCD" layoutX="544.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Compra" wrappingWidth="221.99997848272324">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="26.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

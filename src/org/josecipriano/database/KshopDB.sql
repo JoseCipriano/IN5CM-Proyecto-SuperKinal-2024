@@ -164,8 +164,8 @@ insert into TicketS (descripcionTicket,estatus,clienteId, facturaId)values
 ('Error en el cobro','finalizado',3,1);
 
 insert into Distribuidores(nombreDistribuidor, direccionDistribuidor, nitDistribuidor,telefonoDistribuidor,web)values
-('Fundacion Kinal','zona3','132454','2254-4174',null),
-('DollarCITY','zona10','8/78465','4041-7841',null);
+('Fundacion Kinal','zona3','132454','2254-4174','funaKina.com'),
+('DollarCITY','zona10','8/78465','4041-7841',NULL);
 
 insert into CategoriaProductos(nombreCategoria,descripcionCategoria)values 
 ('Carnes ','Parte de embutidos'),
@@ -260,7 +260,7 @@ DELIMITER $$
 create procedure sp_agregarTicketS(descT varchar(250), cliId int, facId int)
 
 BEGIN
-	insert into TicketS(descripcionTicket, clienteId, facturaId) 
+	insert into TicketS(descripcionTicket, estatus, clienteId, facturaId) 
     values (descT, 'Recien Creado' , cliId, facId);
 END $$
 DELIMITER ;
@@ -315,7 +315,7 @@ DELIMITER $$
 CREATE PROCEDURE sp_ListarTicketS2 ()
 BEGIN 
 	SELECT TS.ticketSId, TS.descripcionTicket, TS.descripcionTicket, TS.estatus ,
-    CONCAT(C.clienteId , C.nombre) AS cliente , TS.facturaId FROM TicketS TS
+    CONCAT("Id: ", C.clienteId , "|", C.nombre," ", C.apellido) AS cliente , TS.facturaId FROM TicketS TS
     join Clientes C on TS.clienteId = C.clienteId;
 
 END $$
@@ -369,7 +369,7 @@ SET
 	nombreCargo = nomC,
     descripcionCargo = desCr,
     cargoId = carId
-    WHERE clienteId =  cliId;
+    WHERE cargoId =  carId;
     end $$
 DELIMITER ;
 
@@ -437,18 +437,16 @@ DELIMITER ;
 DELIMITER $$
 create procedure sp_ListarEmpleados()
 BEGIN 
-	SELECT 
-		Empleados.empleadoId,
-        Empleados.nombreEmpleado,
-        Empleados.apellidoEmpleado,
-        Empleados.sueldo,
-        Empleados.horaEntrada,
-        Empleados.horaSalida,
-        Empleados.cargoId,
-        Empleados.encargadoId
-        FROM Empleados;
+	SELECT E.empleadoId, E.nombreEmpleado,E.apellidoEmpleado,E.sueldo,E.horaEntrada, E.horaSalida,
+		concat("Id: ", C.cargoId,"|", C.nombreCargo) AS Cargo,
+        concat("Id: ", E.encargadoId) AS Encargado
+        from Empleados E JOIN Cargos C on E.cargoId = C.cargoId;
+		
 		END $$
 DELIMITER ; 
+
+
+
 
 DELIMITER $$
 create procedure sp_eliminarEmpleados(empId INT)
@@ -481,6 +479,61 @@ SET
     encargadoId = encId,
     empleadoId = empId
     WHERE empleadoId = empId;
+    end $$
+DELIMITER ;
+
+-- -------------------------------------DISTRIBUIDOR
+DELIMITER $$
+create procedure sp_agregarDistribuidores(nomD varchar(30), dirD varchar (200), nitD varchar(15), telD varchar(15), web varchar(50) )
+
+BEGIN
+	insert into Distribuidores(nombreDistribuidor, direccionDistribuidor, nitDistribuidor, telefonoDistribuidor, web) values
+		(nomD, dirD, nitD,telD,web);
+END $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure sp_ListarDistribuidores()
+BEGIN 
+	SELECT 
+		Distribuidores.distribuidorId,
+        Distribuidores.nombreDistribuidor, 
+        Distribuidores.direccionDistribuidor, 
+        Distribuidores.nitDistribuidor,
+        Distribuidores.telefonoDistribuidor,
+        Distribuidores.web
+        FROM Distribuidores;
+		END $$
+DELIMITER ; 
+call sp_ListarDistribuidores();
+DELIMITER $$
+create procedure sp_eliminarDistribuidores(distId INT)
+BEGIN 
+	DELETE FROM Distribuidores
+    where distribuidorId = distId;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE sp_BuscarDistribuidores(distId int)
+BEGIN 
+	SELECT*from Distribuidores
+		where distribuidorId = distId;
+	END $$
+DELIMITER ; 
+
+DELIMITER $$ 
+CREATE PROCEDURE sp_EditarDistribuidores(distId int , nomD varchar(30), dirD varchar (200), nitD varchar(15), telD varchar(15), web varchar(50) )
+BEGIN 
+UPDATE Distribuidores
+SET 
+	nombreDistribuidor = nomD,
+    direccionDistribuidor = dirD,
+    nitDistribuidor = nitD,
+    telefonoDistribuidor = telD,
+    web =  web,
+	distribuidorId = distId
+    WHERE distribuidorId = distId;
     end $$
 DELIMITER ;
 

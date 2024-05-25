@@ -7,6 +7,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="675.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.josecipriano.controller.MenuDistribuidorController">
    <children>
@@ -15,22 +17,59 @@
             <Image url="@../image/menuDistribuidores%20(1).png" />
          </image>
       </ImageView>
-      <TableView layoutX="61.0" layoutY="182.0" prefHeight="459.0" prefWidth="628.0">
+      <TableView fx:id="tblDistribuidor" layoutX="61.0" layoutY="312.0" onMouseClicked="#cargarForm" onSort="#handleButtonAction" prefHeight="329.0" prefWidth="628.0">
         <columns>
-          <TableColumn prefWidth="93.0" text="Distribuidor ID" />
-          <TableColumn prefWidth="102.0" text="Nombre" />
-            <TableColumn prefWidth="102.0" text="Direccion" />
-            <TableColumn prefWidth="77.0" text="NIT" />
-            <TableColumn prefWidth="137.0" text="Telefono" />
-            <TableColumn prefWidth="105.0" text="WEB" />
+          <TableColumn fx:id="colDistribuidorId" prefWidth="93.0" text="Distribuidor ID" />
+          <TableColumn fx:id="colNombre" prefWidth="102.0" text="Nombre" />
+            <TableColumn fx:id="colDireccion" prefWidth="102.0" text="Direccion" />
+            <TableColumn fx:id="colNit" prefWidth="77.0" text="NIT" />
+            <TableColumn fx:id="colTelefono" prefWidth="137.0" text="Telefono" />
+            <TableColumn fx:id="colWeb" prefWidth="116.0" text="WEB" />
         </columns>
       </TableView>
-      <TextField layoutX="130.0" layoutY="150.0" prefHeight="25.0" prefWidth="559.0" />
+      <TextField fx:id="tfBuscar" layoutX="130.0" layoutY="273.0" onAction="#handleButtonAction" prefHeight="25.0" prefWidth="559.0" />
       <Button fx:id="btnRegresar" layoutX="866.0" layoutY="629.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Regresar" />
       <Button layoutX="761.0" layoutY="424.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="161.0" text="Reportes" />
-      <Button layoutX="761.0" layoutY="350.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="161.0" text="Editar" />
-      <Button layoutX="761.0" layoutY="285.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="161.0" text="Eliminar" />
-      <Button layoutX="761.0" layoutY="206.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="161.0" text="Agregar" />
-      <Button layoutX="72.0" layoutY="150.0" mnemonicParsing="false" text="Buscar" />
+      <Button fx:id="btnEditar" layoutX="761.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="37.0" prefWidth="161.0" text="Editar" />
+      <Button fx:id="btnEliminar" layoutX="761.0" layoutY="285.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="37.0" prefWidth="161.0" text="Eliminar" />
+      <Button fx:id="btnAgregar" layoutX="761.0" layoutY="206.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="37.0" prefWidth="161.0" text="Agregar" />
+      <Button fx:id="btnBuscar" layoutX="61.0" layoutY="273.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Buscar" />
+      <TextField fx:id="tfDistribuidorId" layoutX="61.0" layoutY="163.0" prefHeight="25.0" prefWidth="171.0" />
+      <TextField fx:id="tfNombre" layoutX="61.0" layoutY="231.0" prefHeight="25.0" prefWidth="171.0" />
+      <TextField fx:id="tfDireccion" layoutX="273.0" layoutY="163.0" prefHeight="25.0" prefWidth="171.0" />
+      <TextField fx:id="tfNit" layoutX="273.0" layoutY="231.0" prefHeight="25.0" prefWidth="171.0" />
+      <TextField fx:id="tfTelefono" layoutX="497.0" layoutY="163.0" prefHeight="25.0" prefWidth="171.0" />
+      <TextField fx:id="tfWeb" layoutX="497.0" layoutY="231.0" prefHeight="25.0" prefWidth="171.0" />
+      <Text fill="#78a890" fontSmoothingType="LCD" layoutX="61.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Distribuidor ID" wrappingWidth="221.99997848272324">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="26.0" />
+         </font>
+      </Text>
+      <Text fill="#78a890" fontSmoothingType="LCD" layoutX="61.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="221.99997848272324">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="26.0" />
+         </font>
+      </Text>
+      <Text fill="#78a890" fontSmoothingType="LCD" layoutX="273.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direccion" wrappingWidth="221.99997848272324">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="26.0" />
+         </font>
+      </Text>
+      <Text fill="#78a890" fontSmoothingType="LCD" layoutX="273.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NIT" wrappingWidth="221.99997848272324">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="26.0" />
+         </font>
+      </Text>
+      <Text fill="#78a890" fontSmoothingType="LCD" layoutX="497.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono" wrappingWidth="221.99997848272324">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="26.0" />
+         </font>
+      </Text>
+      <Text fill="#78a890" fontSmoothingType="LCD" layoutX="497.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WEB" wrappingWidth="221.99997848272324">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="26.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnVaciar" layoutX="693.0" layoutY="312.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Vaciar" />
    </children>
 </AnchorPane>

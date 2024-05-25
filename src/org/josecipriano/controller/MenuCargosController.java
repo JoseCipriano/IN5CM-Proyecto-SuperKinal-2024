@@ -36,9 +36,13 @@ import org.josecipriano.model.Cargos;
  */
 public class MenuCargosController implements Initializable {
     private Main stage;
+    private int op = 0;
+    
+    
     private static Connection conexion = null;
     private static PreparedStatement statement = null;
     private ResultSet resultSet = null;
+   
     
     @FXML
     TextField tfcargoId, tfnombreCargo, tfbuscar;
@@ -61,12 +65,11 @@ public class MenuCargosController implements Initializable {
                 cargarDatos();
             }
         } else if(event.getSource() == btnEditar){
+            
         
         if(!tfnombreCargo.getText().equals("") && !taDescripcion.getText().equals("")){
-      
-            CargosDTO.getCargosDTO().setCargos((Cargos)tblCargos.getSelectionModel().getSelectedItem());
         editarCargos();
-       
+        CargosDTO.getCargosDTO().setCargos(null);
         cargarDatos();
         }
       } else if (event.getSource() == btnEliminar){
@@ -74,11 +77,20 @@ public class MenuCargosController implements Initializable {
           cargarDatos();
       
       
-      }else if (event.getSource() == btnBuscar){
-          tblCargos.getItems().clear();
-          if(tfbuscar.getText().equals("")){
-              cargarDatos();
-          }
+          }else if (event.getSource() == btnBuscar){
+            tblCargos.getItems().clear();
+            tfbuscar.getText().equals("");
+            tblCargos.getItems().add(buscarCargos());
+          
+ 
+        
+          
+          
+          
+          
+      }else if(event.getSource() == btnVaciar){
+          vaciarForm();
+      
       }
     
     
@@ -95,13 +107,12 @@ public class MenuCargosController implements Initializable {
     
     
     public void cargarDatos(){
+        
+       
      tblCargos.setItems(listarCargos());
     colCargoId.setCellValueFactory(new PropertyValueFactory<Cargos, Integer> ("cargoId"));
     colNombre.setCellValueFactory(new PropertyValueFactory<Cargos, String> ("NombreCargo"));
     colDescripcion.setCellValueFactory(new PropertyValueFactory<Cargos, String> ("DescripcionCargo"));
-    
-    
-    
     
     
     
@@ -143,6 +154,13 @@ public class MenuCargosController implements Initializable {
      tfnombreCargo.setText(cr.getNombreCargo());
      taDescripcion.setText(cr.getDescripcionCargo());
      }
+   }
+    
+    
+   public void vaciarForm(){
+      tfcargoId.clear(); 
+      tfnombreCargo.clear();
+      taDescripcion.clear();
    }
     
     public void editarCargos(){
@@ -208,13 +226,13 @@ public class MenuCargosController implements Initializable {
        conexion = Conexion.getInstance().obtenerConexion();
        String sql = "call sp_BuscarCargos(?)";
        statement = conexion.prepareStatement(sql);
-       statement.setInt(1, Integer.parseInt(tfcargoId.getText()));
+       statement.setInt(1, Integer.parseInt(tfbuscar.getText()));
        resultSet = statement.executeQuery();
        
        if(resultSet.next()){
            int cargoId = resultSet.getInt("cargoId");
-           String nombreCargo = resultSet.getString("nombreCargo");
-           String descripcionCargo = resultSet.getString("descripcionCargo");
+           String nombreCargo = resultSet.getString("NombreCargo");
+           String descripcionCargo = resultSet.getString("DescripcionCargo");
           
            cargos = new Cargos(cargoId , nombreCargo, descripcionCargo);
        }  
